@@ -58,7 +58,7 @@ stediEventsStreamingDF = stediEventsRawStreamingDF.selectExpr(
 # sink the customerRiskStreamingDF dataframe to the console in append mode
 stediEventsStreamingDF = stediEventsStreamingDF.withColumn(
     "value", from_json(col("value"), stediSchema)
-).select(col("value.*"))
+).select(col("value.customer"), col("value.score"))
 
 stediEventsStreamingDF.createOrReplaceTempView("CustomerRisk")
 
